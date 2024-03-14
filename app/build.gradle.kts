@@ -16,6 +16,10 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
+    //ViewBinding
+    buildFeatures{
+        viewBinding=true
+    }
 
     buildTypes {
         release {
@@ -43,6 +47,9 @@ dependencies {
 
     // Picasso
     implementation("com.squareup.picasso:picasso:2.8")
+
+    //Corrutinas
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
 
 
     implementation("androidx.core:core-ktx:1.12.0")
