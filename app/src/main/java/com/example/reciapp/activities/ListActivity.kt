@@ -4,7 +4,13 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.appcompat.widget.SearchView
 import com.example.reciapp.R
+import com.example.reciapp.data.RecipeServiceApi
 import com.example.reciapp.databinding.ActivityListBinding
+import com.example.reciapp.utils.RetrofitProvider
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
 import retrofit2.Retrofit
 
 class ListActivity : AppCompatActivity() {
@@ -30,6 +36,13 @@ class ListActivity : AppCompatActivity() {
         })
     }
     private fun searchByName(query:String){
+
+        val service: RecipeServiceApi = RetrofitProvider.getRetrofit()
+
+
+        CoroutineScope(Dispatchers.IO).launch {
+            val myResponse = service.searchByName(query)
+        }
 
 
     }

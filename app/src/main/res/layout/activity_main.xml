@@ -48,7 +48,8 @@
         android:backgroundTint="@color/white"
         app:cardCornerRadius="25sp"
         android:layout_weight="1"
-        android:layout_marginTop="5dp">
+        android:layout_marginTop="5dp"
+        >
         <LinearLayout
             android:id="@+id/favRecipesLL"
             android:layout_width="match_parent"
