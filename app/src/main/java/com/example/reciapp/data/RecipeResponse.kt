@@ -7,11 +7,13 @@ data class RecipeResponse (
 )
 
  data class RecipeItemResponse (
-    @SerializedName("ingredients") val ingredients:String,
+    @SerializedName("id") val id: Int,
+    @SerializedName("name") val name: String,
+    @SerializedName("ingredients") val ingredients:List<String>,
     @SerializedName("prepTimeMinutes") val prepTimeMinutes:Int,
     @SerializedName("cookTimeMinutes") val cookTimeMinutes:Int,
-    @SerializedName("difficulty") val difficulty:Float,
-    @SerializedName("rating") val rating:String,
+    @SerializedName("difficulty") val difficulty:String,
+    @SerializedName("rating") val rating:Float,
     @SerializedName("image") val image:String,
 
 

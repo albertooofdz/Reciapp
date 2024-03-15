@@ -6,6 +6,9 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface RecipeServiceApi {
-    @GET("/search?q={name}")
-    suspend fun searchByName(@Query("name") recipeName:String) : Response<RecipeResponse>
+    @GET("search")
+    suspend fun searchByName(@Query("q") recipeName:String) : Response<RecipeResponse>
+    @GET("{id}")
+    suspend fun searchById(@Path("id")recipeId:Int) : Response<RecipeResponse>
+
 }
