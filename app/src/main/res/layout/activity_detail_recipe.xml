@@ -1,9 +1,133 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".activities.DetailRecipeActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="bottom|end"
+            android:layout_marginBottom="10dp"
+            android:layout_marginEnd="10dp"
+            android:src="@drawable/ic_favourite"
+            app:fabCustomSize="50dp"
+            android:backgroundTint="@color/favourite"/>
+
+      <ImageView
+        android:id="@+id/detailImageIV"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:scaleType="centerCrop"
+        tools:background="@color/purple_500"/>
+
+    </androidx.cardview.widget.CardView>
+
+    <ScrollView
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/detailImageIV"
+        >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/ic_time"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/detailPrepTimeTV"
+                android:textSize="20sp"
+                android:textColor="@color/black"
+                android:layout_weight="1"/>
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/ic_favourite"
+                app:tint="@color/black" />
+            <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/detailRatingTV"
+                android:textSize="20sp"
+                android:textColor="@color/black"
+                android:layout_weight="1"/>
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/ic_difficult"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/detailDifficultTV"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:layout_weight="1"/>
+
+
+        </LinearLayout>
+    <TextView
+        android:id="@+id/recipeDetailNameTV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="30dp"
+        tools:text="Pasta con macarornes"
+        android:gravity="center"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="25sp"
+        android:text="Ingredientes"
+        android:gravity="center"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/ingredientsTV"
+        android:textSize="20sp"
+        android:layout_marginStart="10dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20sp"
+        android:text="Instrucciones"
+        android:gravity="center"
+        android:textSize="25sp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/instructionTV"
+        android:textSize="20sp"
+        android:layout_marginStart="10dp"/>
+
+
+    </LinearLayout>
+    </ScrollView>
+
+
+
+
+
+</LinearLayout>

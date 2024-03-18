@@ -11,7 +11,7 @@ import com.squareup.picasso.Picasso
 
 class RecipeAdapter(
     var recipesList: List<RecipeItemResponse> = emptyList(),
-    private val onItemSelected: (Int) -> Unit
+    private val onItemSelected: (Int, String) -> Unit
 ) :
     RecyclerView.Adapter<RecipeViewHolder>() {
 
@@ -41,12 +41,23 @@ class RecipeAdapter(
 class RecipeViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
     private val binding = ItemListBinding.bind(view)
-    fun bind(recipeItemResponse: RecipeItemResponse, onItemSelected: (Int) -> Unit) {
+    fun bind(recipeItemResponse: RecipeItemResponse, onItemSelected: (Int, String) -> Unit) {
         binding.recipeNameTV.text = recipeItemResponse.name
 
         Picasso.get().load(recipeItemResponse.image).into(binding.recipeImageIv)
-        binding.root.setOnClickListener{ onItemSelected(recipeItemResponse.id)}
+        binding.root.setOnClickListener{ onItemSelected(recipeItemResponse.id, recipeItemResponse.image)}
+
+        binding.prepTimeTV.text= (recipeItemResponse.prepTimeMinutes+recipeItemResponse.cookTimeMinutes).toString() + "'"
+
+        binding.difficultTV.text=recipeItemResponse.difficulty
+
+        binding.scoreTV.text= recipeItemResponse.rating.toString()
+
+
+
 
     }
+
+
 
 }

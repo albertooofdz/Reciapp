@@ -9,6 +9,6 @@ interface RecipeServiceApi {
     @GET("search")
     suspend fun searchByName(@Query("q") recipeName:String) : Response<RecipeResponse>
     @GET("{id}")
-    suspend fun searchById(@Path("id")recipeId:Int) : Response<RecipeResponse>
+    suspend fun searchById(@Path("id")recipeId:Int) : Response<RecipeItemResponse>
 
 }

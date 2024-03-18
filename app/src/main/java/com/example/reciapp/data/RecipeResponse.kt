@@ -15,6 +15,5 @@ data class RecipeResponse (
     @SerializedName("difficulty") val difficulty:String,
     @SerializedName("rating") val rating:Float,
     @SerializedName("image") val image:String,
-
-
-    )
+    @SerializedName("instructions") val instructions:List<String>,
+)

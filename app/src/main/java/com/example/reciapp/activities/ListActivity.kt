@@ -14,6 +14,7 @@ import com.example.reciapp.data.RecipeServiceApi
 import com.example.reciapp.databinding.ActivityListBinding
 
 import com.example.reciapp.utils.Constants.Companion.EXTRA_ID
+import com.example.reciapp.utils.Constants.Companion.EXTRA_IMAGE
 
 import com.example.reciapp.utils.RetrofitProvider
 import kotlinx.coroutines.CoroutineScope
@@ -49,7 +50,9 @@ class ListActivity : AppCompatActivity() {
             }
         })
 
-        adapter= RecipeAdapter{navigateToDetail(it)}
+        adapter= RecipeAdapter{ id, image ->
+            navigateToDetail(id, image)
+        }
         binding.recycleRecipe.setHasFixedSize(true)
         binding.recycleRecipe.layoutManager = LinearLayoutManager(this)
         binding.recycleRecipe.adapter = adapter
@@ -72,7 +75,7 @@ class ListActivity : AppCompatActivity() {
                 Log.i("hola","funciona")
                 Log.i("hola",response.toString())
                     runOnUiThread {
-                        adapter.updateList(response.recipes   )
+                        adapter.updateList(response.recipes)
                         binding.progressBar.isVisible=false
                     }
                 }
@@ -82,9 +85,10 @@ class ListActivity : AppCompatActivity() {
 
         }
     }
-    private fun navigateToDetail(id:Int){
+    private fun navigateToDetail(id:Int, image:String){
         val intent= Intent(this, DetailRecipeActivity:: class.java)
         intent.putExtra(EXTRA_ID,id)
+        intent.putExtra(EXTRA_IMAGE,image)
         startActivity(intent)
 
     }
