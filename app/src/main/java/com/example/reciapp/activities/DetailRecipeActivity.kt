@@ -1,17 +1,14 @@
 package com.example.reciapp.activities
 
-import android.media.Image
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import androidx.core.view.isVisible
 import com.example.reciapp.R
+import com.example.reciapp.SQLite.RecipeDAO
 import com.example.reciapp.data.RecipeItemResponse
 
-import com.example.reciapp.data.RecipeResponse
 import com.example.reciapp.data.RecipeServiceApi
 import com.example.reciapp.databinding.ActivityDetailRecipeBinding
-import com.example.reciapp.databinding.ActivityListBinding
 import com.example.reciapp.utils.Constants.Companion.EXTRA_ID
 import com.example.reciapp.utils.Constants.Companion.EXTRA_IMAGE
 import com.example.reciapp.utils.RetrofitProvider
@@ -22,15 +19,36 @@ import kotlinx.coroutines.launch
 
 class DetailRecipeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailRecipeBinding
+    lateinit var recipeDAO: RecipeDAO
+    lateinit var recipe : RecipeItemResponse
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailRecipeBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        recipeDAO = RecipeDAO(this)
         val image=intent.getStringExtra(EXTRA_IMAGE)
         val id=intent.getIntExtra (EXTRA_ID, -1)
 
+
         Picasso.get().load(image).into(binding.detailImageIV)
+
+        binding.favBtn.isEnabled = false
+
+        if (recipeDAO.find(id) != null) {
+            binding.favBtn.setImageResource(R.drawable.ic_favourite_selected)
+        } else {
+            binding.favBtn.setImageResource(R.drawable.ic_favourite)
+        }
+        binding.favBtn.setOnClickListener{
+            val exist = recipeDAO.find(id)
+            if (exist != null) {
+                recipeDAO.delete(recipe)
+                binding.favBtn.setImageResource(R.drawable.ic_favourite)
+            } else {
+                recipeDAO.insert(recipe)
+                binding.favBtn.setImageResource(R.drawable.ic_favourite_selected)
+            }
+        }
 
 
         getRecipeInfo(id)
@@ -50,34 +68,36 @@ class DetailRecipeActivity : AppCompatActivity() {
                     Log.i("hola","funciona")
                     Log.i("hola",response.toString())
                     runOnUiThread {
-                        loadData(response)
+                        recipe=response
+                        loadData()
 
                     }
                 }
             }
         }
     }
-    private fun loadData(recipeItemResponse: RecipeItemResponse){
+    private fun loadData(){
 
         var instructionsText=""
-        recipeItemResponse.instructions.forEachIndexed { index, element ->
+        recipe.instructions.forEachIndexed { index, element ->
             if (index>0) instructionsText +="\n"
             instructionsText+= "- $element"}
 
         binding.instructionTV.text=instructionsText
 
         var ingredientsText=""
-        recipeItemResponse.ingredients.forEachIndexed { index, element ->
+        recipe.ingredients.forEachIndexed { index, element ->
             if(index>0) ingredientsText += "\n"
             ingredientsText+= "- $element"}
         binding.ingredientsTV.text= ingredientsText
 
-        binding.detailPrepTimeTV.text= (recipeItemResponse.prepTimeMinutes+recipeItemResponse.cookTimeMinutes).toString()+"'"
+        binding.detailPrepTimeTV.text= (recipe.prepTimeMinutes+recipe.cookTimeMinutes).toString()+"'"
 
-        binding.detailRatingTV.text=recipeItemResponse.rating.toString()
+        binding.detailRatingTV.text=recipe.rating.toString()
 
-        binding.detailDifficultTV.text=recipeItemResponse.difficulty
+        binding.detailDifficultTV.text=recipe.difficulty
 
+        binding.favBtn.isEnabled = true
 
 
 

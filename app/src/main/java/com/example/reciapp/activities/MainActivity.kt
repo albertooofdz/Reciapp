@@ -24,6 +24,12 @@ class MainActivity : AppCompatActivity() {
 
             val intent = Intent(this@MainActivity, ListActivity::class.java)
             startActivity(intent)
+
+        binding.favRecipesLL.setOnClickListener{
+
+            val intent = Intent(this@MainActivity, FavouriteActivity::class.java)
+            startActivity(intent)
+        }
         }
 
     }

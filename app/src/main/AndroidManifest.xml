@@ -16,6 +16,9 @@
         android:theme="@style/Theme.Reciapp"
         tools:targetApi="31">
         <activity
+            android:name=".activities.FavouriteActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.DetailRecipeActivity"
             android:exported="false" />
         <activity

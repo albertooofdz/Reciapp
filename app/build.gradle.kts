@@ -51,6 +51,9 @@ dependencies {
     //Corrutinas
     implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
 
+    //SQLite
+    implementation("androidx.sqlite:sqlite-ktx:2.4.0")
+
 
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
