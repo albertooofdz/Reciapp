@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Reciapp</string>
+    <string name="search_recipes">Buscar recetas</string>
+    <string name="night_mode">Modo Noche</string>
+    <string name="ingredients">Ingredientes</string>
+    <string name="instructions">Instrucciones</string>
+</resources>

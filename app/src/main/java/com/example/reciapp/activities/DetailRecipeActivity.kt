@@ -32,23 +32,6 @@ class DetailRecipeActivity : AppCompatActivity() {
 
         Picasso.get().load(image).into(binding.detailImageIV)
 
-        binding.favBtn.isEnabled = false
-
-        if (recipeDAO.find(id) != null) {
-            binding.favBtn.setImageResource(R.drawable.ic_favourite_selected)
-        } else {
-            binding.favBtn.setImageResource(R.drawable.ic_favourite)
-        }
-        binding.favBtn.setOnClickListener{
-            val exist = recipeDAO.find(id)
-            if (exist != null) {
-                recipeDAO.delete(recipe)
-                binding.favBtn.setImageResource(R.drawable.ic_favourite)
-            } else {
-                recipeDAO.insert(recipe)
-                binding.favBtn.setImageResource(R.drawable.ic_favourite_selected)
-            }
-        }
 
 
         getRecipeInfo(id)
@@ -97,7 +80,7 @@ class DetailRecipeActivity : AppCompatActivity() {
 
         binding.detailDifficultTV.text=recipe.difficulty
 
-        binding.favBtn.isEnabled = true
+
 
 
 
